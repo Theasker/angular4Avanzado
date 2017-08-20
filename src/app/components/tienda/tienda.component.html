@@ -1,0 +1,31 @@
+Componente padre:
+<h1>{{titulo}}</h1>
+
+<hr>
+
+Nombre del parque:
+<input type="text" [(ngModel)]="nombreDelParque" (keyup)="mostrarNombre()">
+<p>Resultado: {{nombreDelParque}}</p>
+
+<hr>
+
+<div *ngIf="miParque">
+    <h4>Datos de miParque desde el hijo</h4>
+    <ol>
+        <li>{{miParque.nombre}}</li>
+        <li>{{miParque.metros}}</li>
+        <li>{{miParque.vegetacion}}</li>
+        <li>{{miParque.abierto}}</li>    
+    </ol>
+    
+</div>
+
+
+<p *ngIf="nombreDelParque">
+    Componente hijo:
+    <app-parques 
+        [nombre]="nombreDelParque" 
+        [metros]="'354'" 
+        (pasameLosDatos)="verDatosParque($event)">
+    </app-parques>
+</p>
