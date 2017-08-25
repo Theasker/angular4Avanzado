@@ -1,11 +1,13 @@
-<h2>{{nombre}}</h2>
-<ul>
-    <li>Metros: {{metros}}</li>
-    <li>Vegetacion: {{vegetacion}}</li>
-    <li>
-        <span *ngIf="abierto">Abierto</span>
-        <span *ngIf="!abierto">Cerrado</span>
-    </li>
-</ul>
-
-<button (click)="emitirEvento($event)">Mostrar en el padre</button>
+<div class="col-lg-12" [@fadeIn]>
+    <h2>{{nombre}}</h2>
+    <ul>
+        <li>Metros: {{metros}}</li>
+        <li>Vegetacion: {{vegetacion}}</li>
+        <li>
+            <span *ngIf="abierto">Abierto</span>
+            <span *ngIf="!abierto">Cerrado</span>
+        </li>
+    </ul>
+    
+    <button (click)="emitirEvento($event)">Mostrar en el padre</button>    
+</div>

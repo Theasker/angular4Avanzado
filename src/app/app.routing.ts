@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { TiendaComponent } from './components/tienda/tienda.component';
 import { AnimalsComponent } from './components/animals/animals.component';
 import { ContactComponent } from './components/contact/contact.component';
-import { HomeComponent } from './components/home/home.comonent';
+import { HomeComponent } from './components/home/home.component';
 import { KeepersComponent } from './components/keepers/keepers.component';
 
 const appRoutes: Routes = [

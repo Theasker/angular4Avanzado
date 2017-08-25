@@ -5,22 +5,6 @@ import { Component, OnInit, DoCheck } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, DoCheck {
+export class AppComponent {
     public title = 'ngZoo';
-    public emailContacto: string;
-
-    ngOnInit() {
-
-    }
-
-    ngDoCheck() {
-      this.emailContacto = localStorage.getItem('emailContacto');    
-    }
-
-    borrarEmail() {
-      localStorage.removeItem('emailContacto');
-
-      //localStorage.clear();
-      this.emailContacto = null;
-    }
 }

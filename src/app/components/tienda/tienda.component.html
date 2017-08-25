@@ -1,31 +1,67 @@
-Componente padre:
-<h1>{{titulo}}</h1>
+<div class="col-lg-12" [@fadeIn]>
+    <h4>Animaciones con Angular 4</h4>
+    <a class="boton_activo btn btn-success" 
+        [@marcar]="status"
+        (click)="cambiarEstado()">
+            <span *ngIf="status == 'inactive'">Boton inactivo</span>
+            <span *ngIf="status == 'active'">Boton activado</span>
+    </a>
 
-<hr>
+    <h4>Animaciones con CSS3</h4>
+    <a class="boton_transiciones">Transiciones</a>
 
-Nombre del parque:
-<input type="text" [(ngModel)]="nombreDelParque" (keyup)="mostrarNombre()">
-<p>Resultado: {{nombreDelParque}}</p>
 
-<hr>
+    <div class="caja_animada">
+        
+    </div>
 
-<div *ngIf="miParque">
-    <h4>Datos de miParque desde el hijo</h4>
-    <ol>
-        <li>{{miParque.nombre}}</li>
-        <li>{{miParque.metros}}</li>
-        <li>{{miParque.vegetacion}}</li>
-        <li>{{miParque.abierto}}</li>    
-    </ol>
-    
+
+    <hr>
+    <h4>Utilizar jQuery dentro de Angular 4</h4>
+    <button id="botonjq" class="btn">Mostrar texto</button>
+    <p id="textojq" class="alert alert-warning">Texto de prueba</p>
+
+    <div id="caja" style="border: 1px solid black; width: 150px; height: 150px;">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eu tempor risus. Aenean cursus eros sit amet nunc ultrices, vel blandit nibh placerat.
+        Donec non magna metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id mollis eros. Phasellus interdum commodo sapien, ac gravida ante.
+    </div>
+
+    <simple-tiny
+        [elementId]="'descripcionTienda'"
+        (onEditorKeyup)="textoRichEditor($event)">
+    </simple-tiny>
+
+    <hr>
+    Componente padre:
+    <h1>{{titulo}}</h1>
+
+    <hr>
+
+    Nombre del parque:
+    <input type="text" [(ngModel)]="nombreDelParque" (keyup)="mostrarNombre()">
+    <p>Resultado: {{nombreDelParque}}</p>
+
+    <hr>
+
+    <div *ngIf="miParque">
+        <h4>Datos de miParque desde el hijo</h4>
+        <ol>
+            <li>{{miParque.nombre}}</li>
+            <li>{{miParque.metros}}</li>
+            <li>{{miParque.vegetacion}}</li>
+            <li>{{miParque.abierto}}</li>    
+        </ol>
+        
+    </div>
+
+
+    <p *ngIf="nombreDelParque">
+        Componente hijo:
+        <app-parques 
+            [nombre]="nombreDelParque" 
+            [metros]="'354'" 
+            (pasameLosDatos)="verDatosParque($event)">
+        </app-parques>
+    </p>
+
 </div>
-
-
-<p *ngIf="nombreDelParque">
-    Componente hijo:
-    <app-parques 
-        [nombre]="nombreDelParque" 
-        [metros]="'354'" 
-        (pasameLosDatos)="verDatosParque($event)">
-    </app-parques>
-</p>

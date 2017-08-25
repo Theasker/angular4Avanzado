@@ -1,8 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, DoCheck, OnDestroy } from '@angular/core';
+import { fadeIn } from '../animation';
 
 @Component({
     selector: 'app-parques',
-    templateUrl: `./parques.component.html`
+    templateUrl: `./parques.component.html`,
+    animations: [fadeIn]
 })
 
 export class ParquesComponent implements OnChanges, OnInit, DoCheck, OnDestroy {
