@@ -2,7 +2,7 @@
 
 var jwt = require('jwt-simple');
 var moment = require('moment');
-var secret = 'clave_secreta_del_curso_de_angular4avanzado';
+const secret = 'clave_secreta_del_curso_de_angular4avanzado';
 
 exports.createToken = function(user){
     var payload = {
@@ -15,6 +15,5 @@ exports.createToken = function(user){
         iat: moment().unix(), // momento de creación del token en formato timestamp
         exp: moment().add(30, 'days').unix // momento de expiración del token (30 días)
     };
-
-    return jwt.encode(payload, secret);
+    return jwt.encode(payload, secret);    
 };
