@@ -2,6 +2,8 @@
 
 // Modulos
 var bcrypt = require('bcrypt-nodejs');
+var fs = require('fs');
+var path = require('path');
 
 // Modelos
 var User = require('../models/user');
@@ -143,17 +145,67 @@ function uploadImage(req, res){
 
     if(req.files){
         var file_path = req.files.image.path;
-        var file_split = file_path.split('\\');
+        var file_split = file_path.split('/');
         var file_name = file_split[2];
+        var file_ext = file_name.split('\.')[1];
 
-        res.status(200).send({
-            file_path: file_path,
-            file_split: file_split,
-            file_name: file_name
-        });
+        if (file_ext == 'png' || file_ext == 'jpg' || file_ext == 'gif') {
+            if(userId != req.user.sub) {
+                return res.status(500).send({message: 'Es otro usuario al logueado'});
+            }
+        
+            User.findByIdAndUpdate(userId, {image: file_name}, {new: true}, (err, userUpdated) => {
+                if(err){
+                    res.status(500).send({message: 'Error al actualizar usuario'});
+                }else {
+                    if(!userUpdated){
+                        res.status(404).send({message: 'No se ha podido actualizar el usuario'});
+                    }else {
+                        res.status(200).send({user: userUpdated, image: file_name});
+                    }
+                }
+            }); 
+        }else {
+            fs.unlink(file_path, (err)=>{
+                if (err){
+                    res.status(200).send({message: 'La extensión de la imagen no es válida y fichero no borrado'});        
+                }else{
+                    res.status(200).send({message: 'La extensión de la imagen no es válida, fichero borrado.'});        
+                }
+            });
+        }
     }else {
         res.status(200).send({message: 'no se han subido ficheros '});        
     }
+}
+
+function getImageFile(req, res){
+    var imageFile = req.params.imageFile;
+    var path_file = './uploads/users/'+imageFile;
+    
+    fs.exists(path_file, function(exists){
+        if (exists){
+            res.sendFile(path.resolve(path_file));
+        }else {
+            res.status(404).send({message: 'La imagen no existe en el servidor'});
+        }
+    });
+}
+
+function getKeepers(req, res){
+    // El parámetro de find es como la cláusula WHERE en formato JSON
+    User.find({role: 'ROLE_ADMIN'}).exec((err, users)=>{
+        if(err){
+            res.status(500).send({message: 'Error en la petición'});
+        }else {
+            if(!users){
+                res.status(404).send({message: 'No hay cuidadores'});
+            }else {
+                res.status(200).send({ users });
+            }
+        }
+    });
+    
 }
 
 module.exports = {
@@ -161,5 +213,7 @@ module.exports = {
     saveUser,
     login,
     updateUser,
-    uploadImage
+    uploadImage,
+    getImageFile,
+    getKeepers
 };
