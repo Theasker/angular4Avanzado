@@ -77,8 +77,6 @@ function login(req, res) {
     var params = req.body;
     var email = params.email;
     var password = params.password
-
-    console.log('params: ', params);
     
     User.findOne({email: email.toLowerCase()}, (err, user) => {
         if (err){
@@ -98,8 +96,8 @@ function login(req, res) {
                                 token: jwt.createToken(user)
                             });
                         }else {
-                            console.log('jwt.createToken(user): ', jwt.createToken(user));
-                            res.status(200).send({user});
+                            console.log('Token: ', jwt.createToken(user));
+                            res.status(200).send({user, token: jwt.createToken(user)});                            
                         }
                     }else { // contraseña incorrecta
                         res.status(404).send({message: 'Password incorrecta, no ha podido loguearse'});
