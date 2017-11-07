@@ -76,9 +76,9 @@ function saveUser(req, res) {
 function login(req, res) {
     var params = req.body;
     var email = params.email;
-    console.log('email: ', email);
     var password = params.password
-    
+
+    console.log('params: ', params);
     
     User.findOne({email: email.toLowerCase()}, (err, user) => {
         if (err){
@@ -93,11 +93,12 @@ function login(req, res) {
                     if (check) { // contraseña correcta
                         // Comprobar y generar token JWT
                         if (params.getToken){
-                            // devolver el token jwt
+                            // devolver el token 
                             res.status(200).send({
                                 token: jwt.createToken(user)
                             });
                         }else {
+                            console.log('jwt.createToken(user): ', jwt.createToken(user));
                             res.status(200).send({user});
                         }
                     }else { // contraseña incorrecta
@@ -147,7 +148,7 @@ function uploadImage(req, res){
         var file_path = req.files.image.path;
         var file_split = file_path.split('/');
         var file_name = file_split[2];
-        var file_ext = file_name.split('\.')[1];
+        var file_ext = file_name.split('\.')[1].toLowerCase();
 
         if (file_ext == 'png' || file_ext == 'jpg' || file_ext == 'gif') {
             if(userId != req.user.sub) {
