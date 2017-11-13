@@ -26,13 +26,13 @@
           </a>
         </li>
         <li>
-          <a [routerLink]="['/tienda']" [routerLinkActive]="['active']" >
+          <a [routerLink]="['/tienda']" [routerLinkActive]="['active']">
             <span class="glyphicon glyphicon-gift"></span>
             Tienda
           </a>
         </li>
         <li>
-          <a [routerLink]="['/contacto']" [routerLinkActive]="['active']" >
+          <a [routerLink]="['/contacto']" [routerLinkActive]="['active']">
             <span class="glyphicon glyphicon-comment"></span>
             Contacto
           </a>
@@ -42,6 +42,23 @@
             Email de Contacto: {{emailContacto}}
             <button (click)="borrarEmail()">Eliminar email de contacto</button>
           </span>
+        </li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right" *ngIf="!identity">
+        <li>
+          <a [routerLink]="['/registro']" [routerLinkActive]="['active']">
+          <span class="glyphicon glyphicon-user"></span> Registro</a>
+        </li>
+        <li>
+          <a [routerLink]="['/login']" [routerLinkActive]="['active']">
+            <span class="glyphicon glyphicon-log-in"></span> Login</a>
+        </li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right" *ngIf="identity">
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown"></a>
         </li>
       </ul>
 

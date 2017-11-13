@@ -18,6 +18,8 @@ import { ContactComponent } from './components/contact/contact.component';
 import { HomeComponent } from './components/home/home.component';
 import { KeepersComponent } from './components/keepers/keepers.component';
 import { SimpleTinyComponent } from './components/simple-tiny/simple-tiny.component';
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { SimpleTinyComponent } from './components/simple-tiny/simple-tiny.compon
     ContactComponent,
     HomeComponent,
     KeepersComponent,
-    SimpleTinyComponent
+    SimpleTinyComponent,
+    RegisterComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

@@ -9,7 +9,13 @@
 }
 
 .navbar-nav .active {
-    border-bottom: 3px solid orange;
+    border-bottom: 3px solid orange !important;
+}
+
+/* para que no haya ningun cambio de tamaño en el menú cuando no haya nada seleccionado */
+.navbar-default .navbar-nav>li>a {
+    border-bottom: 3px solid transparent;
+    transition:  all 300ms;
 }
 
 .navbar-default .navbar-nav>li>a:hover {
